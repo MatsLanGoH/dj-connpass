@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}
+    <h1>All events</h1>
+{% endblock title %}
+
+{% block content %}
+    {% if title %}
+    <div class="card">
+        <div class="card-body">
+            <div class="tile">
+                <div class="tile-content">
+                    <div class="tile-title">
+                        <h4>{{ started_at|date:"M dS" }}</h4>
+                    </div>
+                    <p class="tile-subtitle text-gray">
+                        <time>
+                        {{ started_at|date:"G:i" }} - {{ ended_at|date:"G:i" }}
+                        </time>
+                    </p>
+                </div>
+                <div class="tile-content">
+                    <span class="label bg-dark">
+                        <a href="{{ series.url }}" class="text-light">{{ series.title }}</a>
+                    </span>
+                    <div class="tile-title">
+                        <a href="{{ event_url }}"><h5>{{ title }}</h5></a>
+                    </div>
+                    <p class="tile-subtitle text-gray">
+                        <span>{{ catch }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="tile">
+                <div class="tile-content">
+                    <span class="chip">
+                        <i class="icon icon-people">
+                        </i>
+                        <a href="https://connpass.com/user/{{ owner_nickname}}">
+                        &nbsp{{ owner_display_name }}
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="tile">
+                <div class="tile-content">
+                    <span class="chip">
+                        <i class="icon icon-location"></i>
+                        <a href="{{ maps_url }}">&nbsp{{ address }}</a>
+                    </span>
+                </div>
+            </div>
+            <div class="tile">
+                <div class="tile-content">
+                        {% if limit %}
+                        <span{% if accepted >= limit %} class="text-error"{% endif %}>
+                        {{ accepted }} / {{ limit }}
+                        </span>
+                        {% else %}
+                        <span>{{ accepted }}</span>
+                        {% endif %}
+                        人
+
+                        {% if waiting %}
+                        <span class="text-gray">({{ waiting }} on waitlist)</span>
+                        {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card">
+        <h4>No results.</h4>
+    </div>
+    {% endif %}
+{% endblock content %}
+

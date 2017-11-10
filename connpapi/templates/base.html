@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Connpass Smart View</title>
+    <link rel="stylesheet" href="{% static 'css/spectre.css' %}">
+    <link rel="stylesheet" href="{% static 'css/spectre-exp.css' %}">
+    <link rel="stylesheet" href="{% static 'css/spectre-icons.css' %}">
+</head>
+<body>
+    <div class="page-header">
+        {% block title %}
+        <h1>Conpass Smart View</h1>
+        {% endblock title %}
+    </div>
+    <div class="content container">
+        {% block content %}
+            <div class="row">
+                <div class="col-md-8">
+                    <p>Hello, world</p>
+                </div>
+            </div>
+        {% endblock content %}
+    </div>
+
+</body>
+</html>
