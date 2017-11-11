@@ -20,6 +20,7 @@ def index(request):
 def event_proc(request):
     # Context provider to provide event data
     MAPS_URL = "https://www.google.com/maps/search/?api=1&"
+
     response = {
         "event_url": "https://bpstudy.connpass.com/event/364/",
         "event_type": "participation",
@@ -47,16 +48,23 @@ def event_proc(request):
         "ended_at": "2012-04-17T20:30:00+09:00",
         "place": "先端技術館＠TEPIA"
     }
-    start_date = response['started_at']
-    end_date = response['ended_at']
-    response['started_at'] = datetime.strptime(start_date, "%Y-%m-%dT%H:%M:%S+09:00")
-    response['ended_at'] = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%S+09:00")
-    response['maps_url'] = MAPS_URL + urlencode({'lat': response['lat'], 'lon': response['lon'], 'query': response['place']})
+
+    response = Connpass().search(keyword='c++', count=10)['events']
+    response = sorted(response, key=lambda event: event['started_at'])
+
+    for event in response:
+        start_date = event['started_at']
+        end_date = event['ended_at']
+        event['started_at'] = datetime.strptime(start_date, "%Y-%m-%dT%H:%M:%S+09:00")
+        event['ended_at'] = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%S+09:00")
+        event['maps_url'] = MAPS_URL + urlencode({'lat': event['lat'], 'lon': event['lon'], 'query': event['place']})
+
     return response
 
 
 def results(request):
     pprint(request)
+    render(request, 'results.html')
     # context = RequestContext(request, processors=[event_proc])
     context = event_proc(request)
-    return render(request, 'results.html', context)
+    return render(request, 'results.html', {'events': context})

@@ -4,29 +4,31 @@
 {% endblock title %}
 
 {% block content %}
-    {% if title %}
+    {% for event in events  %}
     <div class="card">
         <div class="card-body">
             <div class="tile">
                 <div class="tile-content">
                     <div class="tile-title">
-                        <h4>{{ started_at|date:"M dS" }}</h4>
+                        <h4>{{ event.started_at|date:"M jS" }}</h4>
                     </div>
                     <p class="tile-subtitle text-gray">
                         <time>
-                        {{ started_at|date:"G:i" }} - {{ ended_at|date:"G:i" }}
+                        {{ event.started_at|date:"G:i" }} - {{ ended_at|date:"G:i" }}
                         </time>
                     </p>
                 </div>
                 <div class="tile-content">
+                    {% if event.series %}
                     <span class="label bg-dark">
-                        <a href="{{ series.url }}" class="text-light">{{ series.title }}</a>
+                        <a href="{{ event.series.url }}" class="text-light">{{ event.series.title }}</a>
                     </span>
+                    {% endif %}
                     <div class="tile-title">
-                        <a href="{{ event_url }}"><h5>{{ title }}</h5></a>
+                        <a href="{{ event.event_url }}"><h5>{{ event.title }}</h5></a>
                     </div>
                     <p class="tile-subtitle text-gray">
-                        <span>{{ catch }}</span>
+                        <span>{{ event.catch }}</span>
                     </p>
                 </div>
             </div>
@@ -37,43 +39,40 @@
                     <span class="chip">
                         <i class="icon icon-people">
                         </i>
-                        <a href="https://connpass.com/user/{{ owner_nickname}}">
-                        &nbsp{{ owner_display_name }}
+                        <a href="https://connpass.com/user/{{ event.owner_nickname}}">
+                        &nbsp{{ event.owner_display_name }}
                         </a>
                     </span>
                 </div>
             </div>
+            {% if event.address %}
             <div class="tile">
                 <div class="tile-content">
                     <span class="chip">
                         <i class="icon icon-location"></i>
-                        <a href="{{ maps_url }}">&nbsp{{ address }}</a>
+                        <a href="{{ event.maps_url }}">&nbsp{{ event.address }}</a>
                     </span>
                 </div>
             </div>
+            {% endif %}
             <div class="tile">
                 <div class="tile-content">
-                        {% if limit %}
-                        <span{% if accepted >= limit %} class="text-error"{% endif %}>
-                        {{ accepted }} / {{ limit }}
+                        {% if event.limit %}
+                        <span{% if event.accepted >= event.limit %} class="text-error"{% endif %}>
+                        {{ event.accepted }} / {{ event.limit }}
                         </span>
                         {% else %}
-                        <span>{{ accepted }}</span>
+                        <span>{{ event.accepted }}</span>
                         {% endif %}
                         人
 
-                        {% if waiting %}
-                        <span class="text-gray">({{ waiting }} on waitlist)</span>
+                        {% if event.waiting %}
+                        <span class="text-gray">({{ event.waiting }} on waitlist)</span>
                         {% endif %}
                 </div>
             </div>
-            </div>
         </div>
     </div>
-    {% else %}
-    <div class="card">
-        <h4>No results.</h4>
-    </div>
-    {% endif %}
+    {% endfor %}
 {% endblock content %}
 
