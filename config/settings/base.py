@@ -126,6 +126,8 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Tokyo' 
 
 
+ALLOWED_HOSTS = ['localhost', '10.0.1.90']
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 

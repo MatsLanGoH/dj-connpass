@@ -8,7 +8,7 @@
     <div class="card">
         <div class="card-body">
             <div class="tile">
-                <div class="tile-content">
+                <div class="tile-content col-2">
                     <div class="tile-title">
                         <h4>{{ event.started_at|date:"M jS" }}</h4>
                     </div>
@@ -18,7 +18,7 @@
                         </time>
                     </p>
                 </div>
-                <div class="tile-content">
+                <div class="tile-content col-10">
                     {% if event.series %}
                     <span class="label bg-dark">
                         <a href="{{ event.series.url }}" class="text-light">{{ event.series.title }}</a>
@@ -37,8 +37,7 @@
             <div class="tile">
                 <div class="tile-content">
                     <span class="chip">
-                        <i class="icon icon-people">
-                        </i>
+                        <i class="icon icon-people"></i>
                         <a href="https://connpass.com/user/{{ event.owner_nickname}}">
                         &nbsp{{ event.owner_display_name }}
                         </a>
