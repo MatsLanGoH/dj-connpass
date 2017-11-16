@@ -35,7 +35,7 @@
                     <span class="chip">
                         <i class="icon icon-people"></i>
                         <a href="https://connpass.com/user/{{ event.owner_nickname }}">
-                        &nbsp{{ event.owner_display_name }}
+                        &nbsp{{ event.owner_display_name|truncatechars:20 }}
                         </a>
                     </span>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="tile-content">
                     <span class="chip">
                         <i class="icon icon-location"></i>
-                        <a href="{{ event.maps_url }}">&nbsp{{ event.address }}</a>
+                        <a href="{{ event.maps_url }}">&nbsp{{ event.address|truncatechars:26 }}</a>
                     </span>
                         </div>
                     </div>

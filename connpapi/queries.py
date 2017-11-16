@@ -39,7 +39,7 @@ def event_proc(query=None):
         keyword = query.get('keyword', '').split()
         keyword_or = query.get('keyword_or', '').split()
         count = int(query.get('count', None))
-        ym = query.get('start_year', []) + query.get('start_month', [])
+        ym = query.get('ym', []).split()
         nickname = query.get('nickname', '').split()
         owner_nickname = query.get('owner_nickname', '').split()
 
