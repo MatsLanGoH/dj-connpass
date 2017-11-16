@@ -102,3 +102,4 @@ ENV/
 
 # text editor files
 .vscode/
+.idea/

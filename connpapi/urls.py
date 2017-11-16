@@ -1,9 +1,9 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 
 from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'loading/', views.loading, name='loading'),
+    url(r'loading', views.loading, name='loading'),
     url(r'results/', views.results, name='results'),
 ]

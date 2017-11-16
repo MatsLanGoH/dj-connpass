@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 from connpass import Connpass
 
 
-def event_proc(request=None):
+def event_proc(query=None):
     # Context provider to provide event data
     MAPS_URL = "https://www.google.com/maps/search/?api=1&"
 
@@ -35,7 +35,19 @@ def event_proc(request=None):
         "place": "先端技術館＠TEPIA"
     }
 
-    response = Connpass().search(keyword='drupal', count=100)['events']
+    if query:
+        keywords = query.get('keywords', None).split()
+        count = int(query.get('count', None))
+        start_date = query.get('start_date', []).split()
+        nickname = query.get('nickname', []).split()
+        owner_nickname = query.get('owner_nickname', []).split()
+
+        response = Connpass().search(keyword=keywords, count=count, start=start_date, nickname=nickname,
+                                    owner_nickname=owner_nickname)['events']
+
+    else:
+        response = Connpass().search(count=5)['events']
+
     response = sorted(response, key=lambda event: event['started_at'])
 
     for event in response:

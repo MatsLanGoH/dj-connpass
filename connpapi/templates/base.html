@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Connpass Smart View</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/spectre.css' %}">
     <link rel="stylesheet" href="{% static 'css/spectre-exp.css' %}">
     <link rel="stylesheet" href="{% static 'css/spectre-icons.css' %}">
@@ -20,7 +20,6 @@
     </div>
     <div class="content container">
         {% block content %}
-        <div class="loading loading-lg"></div>
         {% endblock content %}
     </div>
 

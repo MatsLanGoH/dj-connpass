@@ -1,77 +1,81 @@
-{% extends "base.html" %}
-{% block title %}
-    <h1>All events</h1>
-{% endblock title %}
+{% if events %}
 
-{% block content %}
-    {% for event in events  %}
-    <div class="card">
-        <div class="card-body">
-            <div class="tile">
-                <div class="tile-content col-2">
-                    <div class="tile-title">
-                        <h4>{{ event.started_at|date:"M jS" }}</h4>
+    {% for event in events %}
+        <div class="card">
+            <div class="card-body">
+                <div class="tile">
+                    <div class="tile-content col-2">
+                        <div class="tile-title">
+                            <h4>{{ event.started_at|date:"M jS" }}</h4>
+                        </div>
+                        <p class="tile-subtitle text-gray">
+                            <time>
+                                {{ event.started_at|date:"G:i" }} - {{ ended_at|date:"G:i" }}
+                            </time>
+                        </p>
                     </div>
-                    <p class="tile-subtitle text-gray">
-                        <time>
-                        {{ event.started_at|date:"G:i" }} - {{ ended_at|date:"G:i" }}
-                        </time>
-                    </p>
-                </div>
-                <div class="tile-content col-10">
-                    {% if event.series %}
-                    <span class="label bg-dark">
+                    <div class="tile-content col-10">
+                        {% if event.series %}
+                            <span class="label bg-dark">
                         <a href="{{ event.series.url }}" class="text-light">{{ event.series.title }}</a>
                     </span>
-                    {% endif %}
-                    <div class="tile-title">
-                        <a href="{{ event.event_url }}"><h5>{{ event.title }}</h5></a>
+                        {% endif %}
+                        <div class="tile-title">
+                            <a href="{{ event.event_url }}"><h5>{{ event.title }}</h5></a>
+                        </div>
+                        <p class="tile-subtitle text-gray">
+                            <span>{{ event.catch }}</span>
+                        </p>
                     </div>
-                    <p class="tile-subtitle text-gray">
-                        <span>{{ event.catch }}</span>
-                    </p>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <div class="tile">
-                <div class="tile-content">
+            <div class="card-footer">
+                <div class="tile">
+                    <div class="tile-content">
                     <span class="chip">
                         <i class="icon icon-people"></i>
-                        <a href="https://connpass.com/user/{{ event.owner_nickname}}">
+                        <a href="https://connpass.com/user/{{ event.owner_nickname }}">
                         &nbsp{{ event.owner_display_name }}
                         </a>
                     </span>
+                    </div>
                 </div>
-            </div>
-            {% if event.address %}
-            <div class="tile">
-                <div class="tile-content">
+                {% if event.address %}
+                    <div class="tile">
+                        <div class="tile-content">
                     <span class="chip">
                         <i class="icon icon-location"></i>
                         <a href="{{ event.maps_url }}">&nbsp{{ event.address }}</a>
                     </span>
-                </div>
-            </div>
-            {% endif %}
-            <div class="tile">
-                <div class="tile-content">
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="tile">
+                    <div class="tile-content">
                         {% if event.limit %}
-                        <span{% if event.accepted >= event.limit %} class="text-error"{% endif %}>
+                            <span{% if event.accepted >= event.limit %} class="text-error"{% endif %}>
                         {{ event.accepted }} / {{ event.limit }}
                         </span>
                         {% else %}
-                        <span>{{ event.accepted }}</span>
+                            <span>{{ event.accepted }}</span>
                         {% endif %}
                         人
 
                         {% if event.waiting %}
-                        <span class="text-gray">({{ event.waiting }} on waitlist)</span>
+                            <span class="text-gray">({{ event.waiting }} on waitlist)</span>
                         {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endfor %}
-{% endblock content %}
+{% else %}
+    <div class="card">
+        <div class="card-body">
+            <div class="tile-content">
+                <p>No events found.</p>
+            </div>
+        </div>
+    </div>
+{% endif %}
 

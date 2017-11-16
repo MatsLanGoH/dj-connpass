@@ -7,7 +7,8 @@ logger = get_task_logger(__name__)
 
 
 @task(name="get_events_data")
-def get_events_data_task():
-    logger.info("Requesting API data")
-    results = event_proc()
+def get_events_data_task(query=None):
+    logger.info("Requesting API data", query)
+    print(query)
+    results = event_proc(query)
     return results
