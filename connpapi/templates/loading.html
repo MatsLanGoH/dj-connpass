@@ -27,9 +27,10 @@
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
-                keywords: '{{ request.POST.search_string }}',
+                {{ request.POST.keyword_option }}: '{{ request.POST.search_string }}',
                 count: '{{ request.POST.count }}',
-                start_date: '{{ request.POST.start_year }}{{ request.POST.start_month|stringformat:"02d" }}{{ request.POST.start_day|stringformat:"02d" }}',
+                start_year: '{{ request.POST.start_year }}',
+                start_month: '{{ request.POST.start_month }}',
                 nickname: '{{ request.POST.nickname }}',
                 owner_nickname: '{{ request.POST.owner_nickname }}'
             }),

@@ -36,14 +36,15 @@ def event_proc(query=None):
     }
 
     if query:
-        keywords = query.get('keywords', None).split()
+        keyword = query.get('keyword', '').split()
+        keyword_or = query.get('keyword_or', '').split()
         count = int(query.get('count', None))
-        start_date = query.get('start_date', []).split()
-        nickname = query.get('nickname', []).split()
-        owner_nickname = query.get('owner_nickname', []).split()
+        ym = query.get('start_year', []) + query.get('start_month', [])
+        nickname = query.get('nickname', '').split()
+        owner_nickname = query.get('owner_nickname', '').split()
 
-        response = Connpass().search(keyword=keywords, count=count, start=start_date, nickname=nickname,
-                                    owner_nickname=owner_nickname)['events']
+        response = Connpass().search(keyword=keyword, keyword_or=keyword_or, count=count, ym=ym, nickname=nickname,
+                                     owner_nickname=owner_nickname)['events']
 
     else:
         response = Connpass().search(count=5)['events']
