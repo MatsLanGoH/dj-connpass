@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-    <h1 id="title">Loading...</h1>
-    <p>{{ request.GET.searchtext }}</p>
 {% endblock title %}
 
 {% block content %}
     <div class="content container">
         <div id="results">
+            <h1 id="title">Loading...</h1>
             <div class="loading loading-lg"></div>
         </div>
     </div>
@@ -27,7 +26,6 @@
                 owner_nickname: '{{ request.POST.owner_nickname }}'
             }),
             success: function(result){
-                $('#title').replaceWith('<h1>Results for </h1>').append('{{ request.POST.search_string }}');
                 $('#results').replaceWith(result);
             }
         });

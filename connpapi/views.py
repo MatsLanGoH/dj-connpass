@@ -1,15 +1,12 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template.loader import get_template
 
 from .forms import QueryForm
 from .tasks import get_events_data_task
 
+
 # Create your views here.
-# connpass = Connpass()
-# print(connpass.search(keyword='django'))
-
-
 def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -29,26 +26,24 @@ def index(request):
 
 
 def loading(request):
-    # if request.POST:
-    #     return HttpResponse(request.POST.get('search_string', 'Nothing here'))
+    if request.method == 'GET':
+        return redirect('index')
+
     return render(request, 'loading.html')
 
 
 def results(request):
-    if request.is_ajax():
-        import json
-        t = get_template('results.html')
-        json_str = request.body.decode(encoding='UTF-8')
-        json_obj = json.loads(json_str)
-        context = get_events_data_task(json_obj)
-        html = t.render({'events': context})
-        return HttpResponse(html)
+    if request.method == 'POST':
+        if request.is_ajax():
+            import json
+            t = get_template('results.html')
+            json_str = request.body.decode(encoding='UTF-8')
+            json_obj = json.loads(json_str)
+            context = get_events_data_task(json_obj)
+            html = t.render({'events': context})
+            return HttpResponse(html)
 
-    else:
-        t = get_template('results.html')
-        context = get_events_data_task()
-        html = t.render({'events': context})
-        return HttpResponse(html)
+    return redirect('index')
 
 
 
