@@ -1,0 +1,115 @@
+{% block title %}
+    <h1 id="title">検索結果</h1>
+{% endblock title %}
+
+{% if events %}
+
+    {% for event in events %}
+        <div class="card">
+            <div class="card-header">
+                <div class="tile">
+                    <div class="tile-content col-6">
+                        <h4>{{ event.started_at|date:"M jS" }}</h4>
+                    </div>
+                    <div class="tile-content col-6">
+                        <time>
+                            {{ event.started_at|date:"G:i" }}
+                            {% if event.ended_at %}
+                                - {{ event.ended_at|date:"G:i" }}
+                            {% endif %}
+                        </time>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="tile">
+                    <!--
+                    <div class="tile-content col-2">
+                        <div class="tile-title">
+                            <h4>{{ event.started_at|date:"M jS" }}</h4>
+                        </div>
+                        <p class="tile-subtitle text-gray">
+                            <time>
+                                {{ event.started_at|date:"G:i" }}
+                                {% if event.ended_at %}
+                                - {{ event.ended_at|date:"G:i" }}
+                                {% endif %}
+                            </time>
+                        </p>
+                    </div>
+                    <div class="tile-content col-10">
+                -->
+                    <div class="tile-content">
+                        {% if event.series %}
+                            <span class="label bg-dark">
+                        <a href="{{ event.series.url }}" class="text-light">{{ event.series.title }}</a>
+                    </span>
+                        {% endif %}
+                        <div class="tile-title">
+                            <a href="{{ event.event_url }}"><h5>{{ event.title }}</h5></a>
+                        </div>
+                        <p class="tile-subtitle text-gray">
+                            <span>{{ event.catch }}</span>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="tile">
+                    <div class="tile-content">
+                    <span class="chip">
+                        主催
+                    </span>
+                        <i class="icon icon-people"></i>
+                        <a href="https://connpass.com/user/{{ event.owner_nickname }}">
+                            &nbsp{{ event.owner_display_name|truncatechars:20 }}
+                        </a>
+                    </div>
+                </div>
+                {% if event.address %}
+                    <div class="tile">
+                        <div class="tile-content">
+                        <span class="chip">
+                            会場
+                        </span>
+                            <i class="icon icon-location"></i>
+                            <a href="{{ event.maps_url }}">&nbsp{{ event.address|truncatechars:26 }}</a>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="tile">
+                    <div class="tile-content">
+                        <span class="chip">
+                            参加
+                        </span>
+                        {% if event.limit %}
+                            <span{% if event.accepted >= event.limit %} class="text-error"{% endif %}>
+                        {{ event.accepted }} / {{ event.limit }}
+                        </span>
+                        {% else %}
+                            <span>{{ event.accepted }}</span>
+                        {% endif %}
+                        人
+
+                        {% if event.waiting %}
+                            <span class="text-gray">(キャンセル待ち {{ event.waiting }}人)</span>
+                        {% endif %}
+                        <meter class="meter" max="{{ event.limit }}" min="0" value="{{ event.accepted }}"
+                               high="{{ event.limit }}">
+                        </meter>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <div class="card-body">
+            <div class="tile-content">
+                <p>No events found.</p>
+            </div>
+        </div>
+    </div>
+{% endif %}
+

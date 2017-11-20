@@ -32,7 +32,6 @@ if READ_DOT_ENV_FILE:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
-
 # Application definition
 
 DJANGO_APPS = (
@@ -46,10 +45,12 @@ DJANGO_APPS = (
 
 
 THIRD_PARTY_APPS = (
+    'storages',
 )
 
 
 LOCAL_APPS = (
+    'connpapi',
 )
 
 
@@ -117,6 +118,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Celery settings
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Tokyo' 
+
+
+ALLOWED_HOSTS = ['localhost', '10.0.1.90']
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -137,6 +149,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = str(ROOT_DIR('staticfiles'))
+
 
 STATICFILES_DIRS = (
     str(APPS_DIR.path('static')),
