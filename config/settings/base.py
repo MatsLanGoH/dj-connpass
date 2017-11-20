@@ -45,6 +45,7 @@ DJANGO_APPS = (
 
 
 THIRD_PARTY_APPS = (
+    'storages',
 )
 
 
@@ -148,6 +149,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = str(ROOT_DIR('staticfiles'))
+
 
 STATICFILES_DIRS = (
     str(APPS_DIR.path('static')),

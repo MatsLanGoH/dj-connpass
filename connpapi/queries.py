@@ -12,6 +12,7 @@ def event_proc(query=None):
         keyword_or = query.get('keyword_or', '').split()
         count = query.get('count', '10')
         ym = query.get('ym', []).split()
+        print(ym)
         nickname = query.get('nickname', '').split()
         owner_nickname = query.get('owner_nickname', '').split()
         response = Connpass().search(keyword=keyword, keyword_or=keyword_or, count=count, ym=ym, nickname=nickname,

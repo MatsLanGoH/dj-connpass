@@ -13,7 +13,8 @@ class QueryForm(forms.Form):
         attrs={'class': 'form-input slider', 'type': 'range', 'min': 1, 'max': 100, 'value': 20}),
         label='Result count', min_value=1, max_value=100, required=False)
     start = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-select', 'type': 'date'}), label='Start date',
-                            initial=datetime.today().strftime('%Y-%m-%d'), required=False)
+                            # initial=datetime.today().strftime('%Y-%m-%d'), required=False)
+                            required=False)
     nickname = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': '参加者ニックネーム'}),
                                label='Find participant(s)', max_length=240, required=False)
     owner_nickname = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': '管理者ニックネーム'}),
