@@ -2,11 +2,13 @@ from .base import *
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
+DEBUG = True
+
 DEFAULT_FILE_STORAGE = 'config.s3utils.MediaS3BotoStorage'
 STATICFILES_STORAGE = 'config.s3utils.StaticS3BotoStorage'
 
 ALLOWED_HOSTS = ['dj-connpass.herokuapp.com']
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 
 # AWS S3 Storage settings
