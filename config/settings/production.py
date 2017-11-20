@@ -1,11 +1,12 @@
 from .base import *
 
-SECRET_KEY = env('DJANGO_SECRET_KEY')$!3fe22ghzz77)9i&m-wb3o')
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 DEFAULT_FILE_STORAGE = 'config.s3utils.MediaS3BotoStorage'
 STATICFILES_STORAGE = 'config.s3utils.StaticS3BotoStorage'
 
 ALLOWED_HOSTS = ['dj-connpass.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # AWS S3 Storage settings
@@ -28,4 +29,3 @@ AWS_LOCATION = 'static'
 
 # Refer to this site regarding settings.
 # https://simpleisbetterthancomplex.com/tutorial/2017/08/01/how-to-setup-amazon-s3-in-a-django-project.html
-ALLOWED_HOSTS = ['*']
