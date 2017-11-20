@@ -10,73 +10,85 @@
         <div class="form-group">
             <div class="col-2 hide-sm">
                 {{ form.search_string.errors }}
-                <label class="form-label" for="{{ form.search_string.id_for_label }}">{{ form.search_string.label }}</label>
+                <label class="form-label"
+                       for="{{ form.search_string.id_for_label }}">{{ form.search_string.label }}</label>
             </div>
             <div class="col-10 col-sm-12">
                 {{ form.search_string }}
             </div>
         </div>
-        <!-- TODO: make collapsible -->
-        <div class="form-group">
-            <div class="col-2 hide-sm">
+        <div class="accordion">
+            <input type="checkbox" id="accordion-search" name="accordion-checkbox" hidden>
+            <label for="accordion-search" class="accordion-header c-hand">
+                <i class="icon icon-arrow-right mr-1"></i>
+                詳細
+            </label>
+            <div class="accordion-body">
+                <!-- TODO: make collapsible -->
+                <div class="form-group">
+                    <div class="col-2 hide-sm">
+                    </div>
+                    <div class="col-10 col-sm-12">
+                        {% for choice in form.keyword_option %}
+                            <label class="form-radio" for="{{ choice.choice_label }}">
+                                {{ choice.choice_label }}
+                            </label>
+                            <i class="form-icon"></i> {{ choice.tag }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.count.errors }}
+                    <div class="col-2 hide-sm">
+                        <label for="{{ form.count.id_for_label }}" class="form-label">
+                            {{ form.count.label }}
+                        </label>
+                    </div>
+                    <div class="col-10 col-sm-12">
+                        {{ form.count }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.start.errors }}
+                    <div class="col-2 hide-sm">
+                        <label for="{{ form.start.id_for_label }}" class="form-label">
+                            {{ form.start.label }}
+                        </label>
+                    </div>
+                    <div class="col-10 col-sm-12">
+                        {{ form.start }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.nickname.errors }}
+                    <div class="col-2 hide-sm">
+                        <label for="{{ form.nickname.id_for_label }}" class="form-label">
+                            {{ form.nickname.label }}
+                        </label>
+                    </div>
+                    <div class="col-10 col-sm-12">
+                        {{ form.nickname }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.owner_nickname.errors }}
+                    <div class="col-2 hide-sm">
+                        <label for="{{ form.owner_nickname.id_for_label }}" class="form-label">
+                            {{ form.owner_nickname.label }}
+                        </label>
+                    </div>
+                    <div class="col-10 col-sm-12">
+                        {{ form.owner_nickname }}
+                    </div>
+                </div>
             </div>
-            <div class="col-10 col-sm-12">
-                {% for choice in form.keyword_option %}
-                    <label class="form-radio" for="{{ choice.choice_label }}">
-                   {{ choice.choice_label }}
-                    </label>
-                    <i class="form-icon"></i> {{ choice.tag }}
-                {% endfor %}
-            </div>
+
         </div>
 
-        <div class="form-group">
-            {{ form.count.errors }}
-            <div class="col-2 hide-sm">
-                <label for="{{ form.count.id_for_label }}" class="form-label">
-                    {{ form.count.label }}
-                </label>
-            </div>
-            <div class="col-10 col-sm-12">
-                {{ form.count }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.start.errors }}
-            <div class="col-2 hide-sm">
-                <label for="{{ form.start.id_for_label }}" class="form-label">
-                    {{ form.start.label }}
-                </label>
-            </div>
-            <div class="col-10 col-sm-12">
-                {{ form.start }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.nickname.errors }}
-            <div class="col-2 hide-sm">
-                <label for="{{ form.nickname.id_for_label }}" class="form-label">
-                    {{ form.nickname.label }}
-                </label>
-            </div>
-            <div class="col-10 col-sm-12">
-                {{ form.nickname }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.owner_nickname.errors }}
-            <div class="col-2 hide-sm">
-                <label for="{{ form.owner_nickname.id_for_label }}" class="form-label">
-                    {{ form.owner_nickname.label }}
-                </label>
-            </div>
-            <div class="col-10 col-sm-12">
-                {{ form.owner_nickname }}
-            </div>
-        </div>
 
         <div class="form-group">
             <button class="btn btn-primary btn-lg btn-block" type="submit">Search</button>
