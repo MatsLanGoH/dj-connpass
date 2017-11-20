@@ -4,8 +4,8 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
-DEFAULT_FILE_STORAGE = 'config.s3utils.MediaS3BotoStorage'
-STATICFILES_STORAGE = 'config.s3utils.StaticS3BotoStorage'
+DEFAULT_FILE_STORAGE = 'config.s3utils.MediaS3Boto3Storage'
+STATICFILES_STORAGE = 'config.s3utils.StaticS3Boto3Storage'
 
 ALLOWED_HOSTS = ['dj-connpass.herokuapp.com']
 # ALLOWED_HOSTS = ['*']
